@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<mule xmlns:ee="http://www.mulesoft.org/schema/mule/ee/core" xmlns:http="http://www.mulesoft.org/schema/mule/http"
+	xmlns="http://www.mulesoft.org/schema/mule/core"
+	xmlns:doc="http://www.mulesoft.org/schema/mule/documentation" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.mulesoft.org/schema/mule/core http://www.mulesoft.org/schema/mule/core/current/mule.xsd
+http://www.mulesoft.org/schema/mule/http http://www.mulesoft.org/schema/mule/http/current/mule-http.xsd
+http://www.mulesoft.org/schema/mule/ee/core http://www.mulesoft.org/schema/mule/ee/core/current/mule-ee.xsd">
+	<http:listener-config name="HTTP_Listener_config" doc:name="HTTP Listener config" doc:id="4843a499-53d1-4ff1-a22f-28bcd419a481" >
+		<http:listener-connection host="0.0.0.0" port="8081" />
+	</http:listener-config>
+	<flow name="gittFlow" doc:id="900de30d-f718-4627-a6ba-8b716c0f4ae8" >
+		<http:listener doc:name="Listener" doc:id="cf165950-404b-40f5-b4eb-282066acad61" config-ref="HTTP_Listener_config" path="/gitt"/>
+		<ee:transform doc:name="Transform Message" doc:id="c1e26a64-1e06-421c-a9c8-b69bc30a5165" >
+			<ee:message >
+				<ee:set-payload ><![CDATA[%dw 2.0
+output application/json
+---
+
+	'this is an demo proj'
+]]></ee:set-payload>
+			</ee:message>
+		</ee:transform>
+	</flow>
+</mule>
